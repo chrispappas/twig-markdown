@@ -13,58 +13,75 @@ use dflydev\markdown\IMarkdownParser;
 class MarkdownExtension extends \Twig_Extension
 {
 
-    /**
-     * @var IMarkdownParser
-     */
-    private $parser;
+	/**
+	 * @var IMarkdownParser
+	 */
+	private $parser;
 
-    public function __construct(IMarkdownParser $parser)
-    {
-        $this->parser = $parser;
-    }
+	/**
+	 * @var string a string representing tags/things to wrap the html output
+	 */
+	private $wrapper;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFilters()
-    {
-        return array(
-            'markdown' => new \Twig_Filter_Method(
-                $this,
-                'parseMarkdown',
-                array(
-                    'is_safe' => array('html'),
-                )
-            ),
-        );
-    }
+	const WRAPPER_PLACEHOLDER = '%%content%%';
 
-    /**
-     * Transform Markdown text to HTML
-     *
-     * @param $text
-     * @return string
-     */
-    public function parseMarkdown($text)
-    {
-        return "<div class='markdown'>" . $this->parser->transformMarkdown($text) . "</div>";
-    }
+	public function __construct(IMarkdownParser $parser, $wrapper = false)
+	{
+		$this->parser = $parser;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getTokenParsers()
-    {
-        return array(
-            new MarkdownTokenParser()
-        );
-    }
+		$this->wrapper = $wrapper;
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'markdown';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getFilters()
+	{
+		return array(
+			'markdown' => new \Twig_Filter_Method(
+				$this,
+				'parseMarkdown',
+				array(
+					'is_safe' => array('html'),
+				)
+			),
+		);
+	}
+
+	public function getHtmlOutput($text) {
+		if ($this->wrapper && strpos($this->wrapper, self::WRAPPER_PLACEHOLDER) !== false){
+			return str_replace(self::WRAPPER_PLACEHOLDER, $this->parseMarkdown($text), $this->wrapper);
+		} else {
+			$this->parser->transformMarkdown($text);
+		}
+	}
+
+	/**
+	 * Transform Markdown text to HTML
+	 *
+	 * @param $text
+	 * @return string
+	 */
+	public function parseMarkdown($text)
+	{
+		return $this->parser->transformMarkdown($text);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getTokenParsers()
+	{
+		return array(
+			new MarkdownTokenParser()
+		);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getName()
+	{
+		return 'markdown';
+	}
 }
