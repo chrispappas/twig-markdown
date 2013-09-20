@@ -52,7 +52,7 @@ class MarkdownExtension extends \Twig_Extension
 		if ($this->wrapper && strpos($this->wrapper, self::WRAPPER_PLACEHOLDER) !== false){
 			return str_replace(self::WRAPPER_PLACEHOLDER, $this->parseMarkdown($text), $this->wrapper);
 		} else {
-			$this->parser->transformMarkdown($text);
+			return $this->parseMarkdown($text);
 		}
 	}
 
