@@ -1,7 +1,8 @@
 Twig Markdown Extension
 =======================
 
-[![Build Status](https://secure.travis-ci.org/aptoma/twig-markdown.png?branch=master)](http://travis-ci.org/aptoma/twig-markdown)
+This is a fork from [Aptoma/twig-markdown](https://github.com/aptoma/twig-markdown), adding a "Wrapper" option to
+automatically wrap markdown content in an arbitrary wrapper.
 
 Twig Markdown extension provides a new filter and a tag to allow parsing of
 content as Markdown in [Twig][1] templates.
@@ -18,7 +19,7 @@ Update your composer.json:
 
 {
     "require": {
-        "aptoma/twig-markdown": "0.1.*"
+        "cpappas/twig-markdown": "dev-master"
     }
 }
 ```
@@ -27,12 +28,16 @@ Update your composer.json:
 
 It's assumed that you will use Composer to handle autoloading.
 
+You can define an arbitrary wrapper that the rendered html will be output with. It uses the %%content%% placeholder to
+denote where the rendered HTML should be output (can appear multiple times, if you really want)
+
 Add the extension to the twig environment:
 
 ```php
 $parser = new \dflydev\markdown\MarkdownParser();
+$wrapper = "<div class='markdown'>%%content%%</div>";
 
-$twig->addExtension(new \Aptoma\Twig\Extension\MarkdownExtension($parser));
+$twig->addExtension(new \Aptoma\Twig\Extension\MarkdownExtension($parser, $wrapper));
 ```
 
 Use filter or tag in your templates:
@@ -43,7 +48,7 @@ Use filter or tag in your templates:
 
 // becomes
 
-<h1>Title</h1>
+<div class='markdown'><h1>Title</h1></div>
 
 // Tag
 {% markdown %}
@@ -56,11 +61,11 @@ Paragraph of text.
 
 // becomes
 
-<h1>Title</h1>
+<div class='markdown'><h1>Title</h1>
 
 <p>Paragraph of text</p>
 
-<pre><code>$block = 'code';</pre></code>
+<pre><code>$block = 'code';</pre></code></div>
 ```
 
 If you only want to use the `markdown`-tag, you can also just add the token parser
