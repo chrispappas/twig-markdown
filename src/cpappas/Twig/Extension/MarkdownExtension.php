@@ -1,8 +1,8 @@
 <?php
 
-namespace Aptoma\Twig\Extension;
+namespace cpappas\Twig\Extension;
 
-use Aptoma\Twig\TokenParser\MarkdownTokenParser;
+use cpappas\Twig\TokenParser\MarkdownTokenParser;
 use dflydev\markdown\IMarkdownParser;
 
 /**
@@ -47,7 +47,7 @@ class MarkdownExtension extends \Twig_Extension
      */
     public function parseMarkdown($text)
     {
-        return $this->parser->transformMarkdown($text);
+        return "<div class='markdown'>" . $this->parser->transformMarkdown($text) . "</div>";
     }
 
     /**

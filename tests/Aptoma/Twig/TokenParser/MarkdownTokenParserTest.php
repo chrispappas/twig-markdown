@@ -1,7 +1,7 @@
 <?php
-namespace Aptoma\Twig\TokenParser;
+namespace cpappas\Twig\TokenParser;
 
-use Aptoma\Twig\Node\MarkdownNode;
+use cpappas\Twig\Node\MarkdownNode;
 
 /**
  * @author Gunnar Lium <gunnar@aptoma.com>

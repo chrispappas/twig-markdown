@@ -1,6 +1,6 @@
 <?php
 
-namespace Aptoma\Twig\Extension;
+namespace cpappas\Twig\Extension;
 
 use dflydev\markdown\MarkdownParser;
 

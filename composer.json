@@ -1,5 +1,5 @@
 {
-    "name": "aptoma/twig-markdown",
+    "name": "cpappas/twig-markdown",
     "description": "Twig extension to work with Markdown content",
     "keywords": ["twig", "markdown"],
     "license": "MIT",
@@ -8,12 +8,16 @@
         "dflydev/markdown": "~1.0"
     },
     "autoload": {
-        "psr-0": { "Aptoma": "src/" }
+        "psr-0": { "cpappas": "src/" }
     },
     "authors": [
         {
             "name": "Gunnar Lium",
             "email": "gunnar@aptoma.com"
+        },
+        {
+            "name": "Chris Pappas",
+            "email": "pappas.christopher@gmail.com"
         }
     ]
 }

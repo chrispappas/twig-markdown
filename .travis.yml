@@ -5,7 +5,6 @@ php:
   - "5.3"
 
 notifications:
-  hipchat: 6b3173ebb0aac4873aeda0310dc8c7@Kitchen Sink
   email:
       recipients:
-        - gunnar@aptoma.com
+        - c.pappas@tippingcanoe.com

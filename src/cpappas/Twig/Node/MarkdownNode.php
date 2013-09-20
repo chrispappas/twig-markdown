@@ -1,6 +1,6 @@
 <?php
 
-namespace Aptoma\Twig\Node;
+namespace cpappas\Twig\Node;
 
 /**
  * Represents a markdown node.
