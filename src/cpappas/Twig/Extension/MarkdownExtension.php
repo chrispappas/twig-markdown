@@ -40,20 +40,12 @@ class MarkdownExtension extends \Twig_Extension
 		return array(
 			'markdown' => new \Twig_Filter_Method(
 				$this,
-				'getHtmlOutput',
+				'parseMarkdown',
 				array(
 					'is_safe' => array('html'),
 				)
 			),
 		);
-	}
-
-	public function getHtmlOutput($text) {
-		if ($this->wrapper && strpos($this->wrapper, self::WRAPPER_PLACEHOLDER) !== false){
-			return str_replace(self::WRAPPER_PLACEHOLDER, $this->parseMarkdown($text), $this->wrapper);
-		} else {
-			return $this->parseMarkdown($text);
-		}
 	}
 
 	/**
@@ -64,7 +56,11 @@ class MarkdownExtension extends \Twig_Extension
 	 */
 	public function parseMarkdown($text)
 	{
-		return $this->parser->transformMarkdown($text);
+		if ($this->wrapper && strpos($this->wrapper, self::WRAPPER_PLACEHOLDER) !== false){
+			return str_replace(self::WRAPPER_PLACEHOLDER, $this->parser->transformMarkdown($text), $this->wrapper);
+		} else {
+			return $this->parser->transformMarkdown($text);
+		}
 	}
 
 	/**
