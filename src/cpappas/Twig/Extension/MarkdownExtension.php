@@ -40,7 +40,7 @@ class MarkdownExtension extends \Twig_Extension
 		return array(
 			'markdown' => new \Twig_Filter_Method(
 				$this,
-				'parseMarkdown',
+				'getHtmlOutput',
 				array(
 					'is_safe' => array('html'),
 				)
