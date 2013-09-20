@@ -37,7 +37,7 @@ Add the extension to the twig environment:
 $parser = new \dflydev\markdown\MarkdownParser();
 $wrapper = "<div class='markdown'>%%content%%</div>";
 
-$twig->addExtension(new \Aptoma\Twig\Extension\MarkdownExtension($parser, $wrapper));
+$twig->addExtension(new \cpappas\Twig\Extension\MarkdownExtension($parser, $wrapper));
 ```
 
 Use filter or tag in your templates:
@@ -72,7 +72,7 @@ If you only want to use the `markdown`-tag, you can also just add the token pars
 to the Twig environment:
 
 ```php
-$twig->addTokenParser(new \Aptoma\Twig\TokenParser\MarkdownTokenParser());
+$twig->addTokenParser(new \cpappas\Twig\TokenParser\MarkdownTokenParser());
 ```
 
 When used as a tag, any whitespace on the first line we be treated as padding and
